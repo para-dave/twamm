@@ -38,5 +38,8 @@ class AMM:
 
         return TradeResult(x_out, y_out, total_x / total_y)
 
+    def instantaneous_y_price(self):
+        return self.x_reserves / self.y_reserves
+
 if __name__ == "__main__":
     pass
