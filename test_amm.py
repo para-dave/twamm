@@ -26,11 +26,11 @@ def test_active_two_way():
     amm = AMM(2, 3)
     # If we put in 2 x and 1 y, the x inflow pool gets half of y,
     # and the y inflow pool gets 1/4 of x
-    res = amm.trade(2, 1)
+    res = amm.trade([1, 1] , [1, 0])
     assert amm.x_reserves == 3
     assert amm.y_reserves == 2
-    assert np.allclose(res.x_out, [1.])
-    assert np.allclose(res.y_out, [2.])
+    assert np.allclose(res.x_out, [1., 0])
+    assert np.allclose(res.y_out, [1, 1])
 
 
 

@@ -6,7 +6,6 @@ class TradeResult:
         self.x_out = x_out
         self.y_out = y_out
 
-
 class AMM:
     def __init__(self, x, y):
         self.x_reserves = x
@@ -31,7 +30,10 @@ class AMM:
         self.x_reserves = self_y_share * total_x
         self.y_reserves = self_x_share * total_y
 
-        return TradeResult(y_in_shares * total_x, x_in_shares * total_y)
+        x_out = y_in_shares * total_x
+        y_out = x_in_shares * total_y
+
+        return TradeResult(x_out, y_out)
 
 if __name__ == "__main__":
     pass
