@@ -9,6 +9,19 @@ def test_simple_uniswap():
     assert np.allclose(res.x_out, [0.])
     assert np.allclose(res.y_out, [0.5, 0.5])
 
+def test_easy_two_way():
+    amm = AMM(2, 3)
+    # If we put in 2 x and 3 y, since it's the same as the AMM
+    # price, the AMM shouldn't participate at all
+    res = amm.trade(2, 3)
+    assert amm.x_reserves == 2
+    assert amm.y_reserves == 3
+    assert np.allclose(res.x_out, [2.])
+    assert np.allclose(res.y_out, [3.])
+
+
+
 
 if __name__ == "__main__":
     test_simple_uniswap()
+    test_easy_two_way()
