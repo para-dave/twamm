@@ -2,9 +2,11 @@ import numpy as np
 
 
 class TradeResult:
-    def __init__(self, x_out, y_out):
+    def __init__(self, x_out, y_out, y_price):
         self.x_out = x_out
         self.y_out = y_out
+        # price of how many x per y for the transaction
+        self.y_price = y_price
 
 class AMM:
     def __init__(self, x, y):
@@ -33,7 +35,7 @@ class AMM:
         x_out = y_in_shares * total_x
         y_out = x_in_shares * total_y
 
-        return TradeResult(x_out, y_out)
+        return TradeResult(x_out, y_out, total_x / total_y)
 
 if __name__ == "__main__":
     pass

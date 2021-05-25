@@ -10,6 +10,9 @@ def test_simple_uniswap():
     assert np.allclose(res.x_out, [0.])
     assert np.allclose(res.y_out, [0.5, 0.5])
 
+    # 2 x per y
+    assert res.y_price == 2
+
 
 def test_easy_two_way():
     amm = AMM(2, 3)
@@ -21,6 +24,9 @@ def test_easy_two_way():
     assert np.allclose(res.x_out, [2.])
     assert np.allclose(res.y_out, [3.])
 
+    # 2 x per 3 y
+    assert np.allclose(res.y_price, 2./3)
+
 
 def test_active_two_way():
     amm = AMM(2, 3)
@@ -31,6 +37,9 @@ def test_active_two_way():
     assert amm.y_reserves == 2
     assert np.allclose(res.x_out, [1., 0])
     assert np.allclose(res.y_out, [1, 1])
+
+    # 2 x per 2 y
+    assert np.allclose(res.y_price, 1.)
 
 
 
