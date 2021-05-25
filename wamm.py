@@ -1,4 +1,3 @@
-import numpy as np
 from amm import AMM, TradeResult
 from whale_order import WhaleOrder
 
