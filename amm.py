@@ -8,6 +8,7 @@ class TradeResult:
         # price of how many x per y for the transaction
         self.y_price = y_price
 
+
 class AMM:
     def __init__(self, x, y):
         self.x_reserves = x

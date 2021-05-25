@@ -8,7 +8,7 @@ class WhaleOrder:
         self.blocks_left = blocks_lifespan
         self.qty_filled = 0
 
-    def update_after_block(self, qty_filled):
+    def update_after_fill(self, qty_filled):
         assert self.is_live()
 
         self.qty_filled += qty_filled
