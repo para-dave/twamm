@@ -1,7 +1,7 @@
-from amm import AMM, TradeResult
-from whale_order import WhaleOrder
+from amm import AMM
 
-class WAMM:
+
+class TWAMM:
     def __init__(self, x, y):
         self.amm = AMM(x, y)
 

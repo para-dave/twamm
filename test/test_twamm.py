@@ -1,22 +1,23 @@
 import numpy as np
-from wamm import *
+from twamm import *
+from whale_order import WhaleOrder
 
 
 def test_get_order_inputs():
-    wamm = WAMM(1,1)
+    twamm = TWAMM(1, 1)
     expired = WhaleOrder(200, 1)
     expired.update_after_fill(1)
     orders = [WhaleOrder(1,1), WhaleOrder(6,2), expired]
-    inputs = wamm.get_order_inputs(orders)
+    inputs = twamm.get_order_inputs(orders)
     assert np.allclose(inputs, [1, 3, 0])
 
 
 def test_process_fills():
-    wamm = WAMM(1, 1)
+    twamm = TWAMM(1, 1)
     expired = WhaleOrder(200, 1)
     expired.update_after_fill(1)
     orders = [WhaleOrder(1, 1), WhaleOrder(6, 2), expired]
-    wamm.process_fills(orders, [1,2,0])
+    twamm.process_fills(orders, [1,2,0])
 
     assert orders[0].qty_filled == 1
     assert not orders[0].is_live()
@@ -28,14 +29,14 @@ def test_process_fills():
 
 
 def test_trade_batch():
-    wamm = WAMM(2,3)
-    wamm.add_x_order(WhaleOrder(2, 1))
-    wamm.add_y_order(WhaleOrder(1, 1))
-    wamm.trade_batch()
+    twamm = TWAMM(2, 3)
+    twamm.add_x_order(WhaleOrder(2, 1))
+    twamm.add_y_order(WhaleOrder(1, 1))
+    twamm.trade_batch()
 
-    assert wamm.x_orders[0].qty_filled == 2
-    assert wamm.y_orders[0].qty_filled == 1
-    assert wamm.last_y_price == 1
+    assert twamm.x_orders[0].qty_filled == 2
+    assert twamm.y_orders[0].qty_filled == 1
+    assert twamm.last_y_price == 1
 
 
 if __name__ == "__main__":

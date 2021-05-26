@@ -13,6 +13,5 @@ def test_do_arb():
     assert amm.instantaneous_y_price() == 0.25
 
 
-
 if __name__ == "__main__":
     test_do_arb()
