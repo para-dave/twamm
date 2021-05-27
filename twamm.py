@@ -16,7 +16,7 @@ class TWAMM:
     def add_y_order(self, order):
         self.y_orders.append(order)
 
-    def trade_batch(self):
+    def virtual_trade_batch(self):
         x_in = self.get_order_inputs(self.x_orders)
         y_in = self.get_order_inputs(self.y_orders)
 

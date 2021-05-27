@@ -32,7 +32,7 @@ def test_trade_batch():
     twamm = TWAMM(2, 3)
     twamm.add_x_order(WhaleOrder(2, 1))
     twamm.add_y_order(WhaleOrder(1, 1))
-    twamm.trade_batch()
+    twamm.virtual_trade_batch()
 
     assert twamm.x_orders[0].qty_filled == 2
     assert twamm.y_orders[0].qty_filled == 1
