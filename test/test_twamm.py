@@ -36,8 +36,6 @@ def test_trade_batch():
 
     assert twamm.x_orders[0].qty_filled == 2
     assert twamm.y_orders[0].qty_filled == 1
-    assert twamm.last_y_price == 1
-
 
 if __name__ == "__main__":
     test_get_order_inputs()

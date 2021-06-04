@@ -5,8 +5,6 @@ class TWAMM:
     def __init__(self, x, y):
         self.amm = AMM(x, y)
 
-        self.last_y_price = None
-
         self.x_orders = []
         self.y_orders = []
 
@@ -24,8 +22,6 @@ class TWAMM:
 
         self.process_fills(self.x_orders, res.y_out)
         self.process_fills(self.y_orders, res.x_out)
-
-        self.last_y_price = res.y_price
 
     def get_order_inputs(self, whale_orders):
         return [order.qty_in_per_block if order.is_live() else 0 for order in whale_orders]
