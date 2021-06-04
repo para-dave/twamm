@@ -71,8 +71,6 @@ def test_infinitesimal_trade():
     assert np.allclose(amm.y_reserves, 10)
 
 
-
-
 if __name__ == "__main__":
     test_simple_cpmm()
     test_easy_two_way()
