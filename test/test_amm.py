@@ -58,7 +58,7 @@ def test_infinitesimal_trade():
     x_start = 100
     y_start = 1
     amm = AMM(x_start, y_start)
-    x_in = 100
+    x_in = 50
     y_in = 100
     res = amm.infinitesimal_trade(x_in, y_in)
 
