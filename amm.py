@@ -40,6 +40,11 @@ class AMM:
         # always convert for convenience
         x_in = np.array(x_in)
         y_in = np.array(y_in)
+
+        # Need to check for one-sided orders to avoid math error
+        if np.sum(x_in) == 0 or np.sum(y_in) == 0:
+            return self.trade(x_in, y_in)
+
         l = np.sqrt(self.x_reserves * self.y_reserves)
         sqrt_p_ratio = np.sqrt(np.sum(y_in) / np.sum(x_in))
         c = (1 - self.y_reserves / (l * sqrt_p_ratio)) / (1 + self.y_reserves / (l * sqrt_p_ratio))

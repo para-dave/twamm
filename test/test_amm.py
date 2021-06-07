@@ -15,7 +15,7 @@ def test_simple_cpmm():
     # Redo with infinitessimal
     amm = AMM(2, 2)
     # x * y = 4, so if we put in 2 x, we should get out 1 y so that 4 * 1 = 4
-    res = amm.infinitesimal_trade([1, 1], 1e-9)
+    res = amm.infinitesimal_trade([1, 1], 0)
     assert np.allclose(amm.x_reserves, 4)
     assert np.allclose(amm.y_reserves, 1)
     assert np.allclose(res.x_out, [0.])

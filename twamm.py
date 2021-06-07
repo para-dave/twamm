@@ -18,7 +18,7 @@ class TWAMM:
         x_in = self.get_order_inputs(self.x_orders)
         y_in = self.get_order_inputs(self.y_orders)
 
-        res = self.amm.trade(x_in, y_in)
+        res = self.amm.infinitesimal_trade(x_in, y_in)
 
         self.process_fills(self.x_orders, res.y_out)
         self.process_fills(self.y_orders, res.x_out)
