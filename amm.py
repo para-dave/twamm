@@ -17,6 +17,12 @@ class AMM:
         x_in = np.array(x_in)
         y_in = np.array(y_in)
 
+        # This all works just fine if x_in and y_in are nonzero,
+        # but for the purposes of this simulation we're only
+        # simulating one-way trades, and using this function for convenience
+        # so this is to make sure we're not simulating the wrong thing anywhere
+        assert np.sum(x_in) == 0 or np.sum(y_in) == 0
+
         total_x = self.x_reserves + x_in.sum()
         total_y = self.y_reserves + y_in.sum()
 

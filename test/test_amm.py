@@ -46,13 +46,14 @@ def test_infinitesimal_trade():
     assert np.allclose(amm.y_reserves + res.y_out, y_start + y_in)
 
     # Verify same as multiple repeated trades
-    num_steps = 100
+    num_steps = 10000
     dupe_amm = AMM(x_start, y_start)
     for i in range(num_steps):
-        dupe_amm.trade(x_in/num_steps, y_in/num_steps)
+        dupe_amm.trade(x_in/num_steps, 0)
+        dupe_amm.trade(0, y_in/num_steps)
 
-    assert np.allclose(amm.x_reserves, dupe_amm.x_reserves)
-    assert np.allclose(amm.y_reserves, dupe_amm.y_reserves)
+    assert np.allclose(amm.x_reserves, dupe_amm.x_reserves, rtol=1e-3, atol=1e-3)
+    assert np.allclose(amm.y_reserves, dupe_amm.y_reserves, rtol=1e-3, atol=1e-3)
 
 
 if __name__ == "__main__":
