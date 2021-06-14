@@ -8,10 +8,10 @@ def process_virtual_trades_first(method):
 
 
 class TWAMM:
-    def __init__(self, x, y, block_number=0):
+    def __init__(self, x, y, last_block_seen=-1):
         self.amm = AMM(x, y)
 
-        self.block_number = block_number
+        self.last_block_seen = last_block_seen
 
         self.x_orders = []
         self.y_orders = []
@@ -25,8 +25,14 @@ class TWAMM:
         self.y_orders.append(order)
 
     def process_virtual_trades(self, block_number):
-        self.block_number = block_number
-        pass
+        # Just do one virtual trade batch for every block between the last one we've seen and this one
+        # Note this is *not* how we would do things on chain: this requires one calculation per block,
+        # whereas to save gas we'd just do one calculation for the entire period, plus one additional calculation
+        # for any block during which a long-term order expired.
+        for block in range(self.last_block_seen, block_number):
+            self.virtual_trade_batch()
+
+        self.last_block_seen = block_number
 
     def virtual_trade_batch(self):
         x_in = self.get_order_inputs(self.x_orders)

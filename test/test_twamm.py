@@ -32,10 +32,16 @@ def test_trade_batch():
     twamm = TWAMM(2, 2)
     twamm.add_x_order(0, LongTermOrder(2, 1))
     twamm.add_y_order(0, LongTermOrder(0, 1))
-    twamm.virtual_trade_batch()
+
+    assert twamm.x_orders[0].qty_filled == 0
+    assert twamm.y_orders[0].qty_filled == 0
+
+    twamm.add_x_order(1, LongTermOrder(2, 1))
 
     assert twamm.x_orders[0].qty_filled == 1
+    assert twamm.x_orders[1].qty_filled == 0
     assert twamm.y_orders[0].qty_filled == 0
+
 
 if __name__ == "__main__":
     test_get_order_inputs()
