@@ -24,6 +24,10 @@ class TWAMM:
     def add_y_order(self, block_number, order):
         self.y_orders.append(order)
 
+    @process_virtual_trades_first
+    def trade_with_internal_amm(self, block_number, x, y):
+        return self.amm.trade(x, y)
+
     def process_virtual_trades(self, block_number):
         # Just do one virtual trade batch for every block between the last one we've seen and this one
         # Note this is *not* how we would do things on chain: this requires one calculation per block,

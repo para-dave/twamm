@@ -72,7 +72,7 @@ class AMM:
         return TradeResult(x_out, y_out)
 
     def instantaneous_y_price(self):
-        return self.x_reserves / self.y_reserves
+        return float(self.x_reserves / self.y_reserves)
 
 if __name__ == "__main__":
     pass
