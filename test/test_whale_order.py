@@ -1,8 +1,8 @@
-from whale_order import *
+from long_term_order import *
 
 
 def test_whale_order():
-    order = WhaleOrder(8, 2)
+    order = LongTermOrder(8, 2)
 
     assert order.qty_in_per_block == 4
 

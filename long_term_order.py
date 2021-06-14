@@ -1,4 +1,4 @@
-class WhaleOrder:
+class LongTermOrder:
     def __init__(self, qty_in, blocks_lifespan):
         self.qty_in = qty_in
         self.blocks_lifespan = blocks_lifespan
