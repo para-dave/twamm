@@ -52,8 +52,8 @@ class AMM:
             return self.trade(x_in, y_in)
 
         k = self.x_reserves * self.y_reserves
-        c = (self.x_reserves*np.sqrt(y_in)-np.sqrt(k*np.sum(x_in))) /\
-            (self.x_reserves*np.sqrt(y_in)+np.sqrt(k*np.sum(x_in)))
+        c = (np.sqrt(self.x_reserves * np.sum(y_in)) - np.sqrt(self.y_reserves * np.sum(x_in))) / \
+            (np.sqrt(self.x_reserves * np.sum(y_in)) + np.sqrt(self.y_reserves * np.sum(x_in)))
         exponent = 2*np.sqrt(np.sum(x_in)*np.sum(y_in)/k)
         end_x_sum = np.sqrt(k*np.sum(x_in)/np.sum(y_in))*(np.exp(exponent)+c)/\
             (np.exp(exponent)-c)
