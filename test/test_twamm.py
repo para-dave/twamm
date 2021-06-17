@@ -17,7 +17,7 @@ def test_process_fills():
     expired = LongTermOrder(200, 1)
     expired.update_after_fill(1)
     orders = [LongTermOrder(1, 1), LongTermOrder(6, 2), expired]
-    twamm.process_fills(orders, [1,2,0])
+    twamm.process_fills(orders, [1, 2, 0])
 
     assert orders[0].qty_filled == 1
     assert not orders[0].is_live()

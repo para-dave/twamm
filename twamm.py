@@ -1,9 +1,11 @@
 from amm import AMM
 
+
 def process_virtual_trades_first(method):
     def wrapper(self, block_number, *args, **kwargs):
         self.process_virtual_trades(block_number)
         return method(self, block_number, *args, **kwargs)
+
     return wrapper
 
 
@@ -48,7 +50,10 @@ class TWAMM:
         self.process_fills(self.y_orders, res.x_out)
 
     def get_order_inputs(self, long_term_orders):
-        return [order.qty_in_per_block if order.is_live() else 0 for order in long_term_orders]
+        return [
+            order.qty_in_per_block if order.is_live() else 0
+            for order in long_term_orders
+        ]
 
     def process_fills(self, whale_orders, fill_quantities):
         for order, quantity in zip(whale_orders, fill_quantities):

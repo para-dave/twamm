@@ -24,4 +24,3 @@ def test_whale_order():
 
 if __name__ == "__main__":
     test_whale_order()
-

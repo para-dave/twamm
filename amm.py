@@ -52,12 +52,20 @@ class AMM:
             return self.trade(x_in, y_in)
 
         k = self.x_reserves * self.y_reserves
-        c = (np.sqrt(self.x_reserves * np.sum(y_in)) - np.sqrt(self.y_reserves * np.sum(x_in))) / \
-            (np.sqrt(self.x_reserves * np.sum(y_in)) + np.sqrt(self.y_reserves * np.sum(x_in)))
-        exponent = 2*np.sqrt(np.sum(x_in)*np.sum(y_in)/k)
-        end_x_sum = np.sqrt(k*np.sum(x_in)/np.sum(y_in))*(np.exp(exponent)+c)/\
-            (np.exp(exponent)-c)
-        end_y_sum = k/end_x_sum
+        c = (
+            np.sqrt(self.x_reserves * np.sum(y_in))
+            - np.sqrt(self.y_reserves * np.sum(x_in))
+        ) / (
+            np.sqrt(self.x_reserves * np.sum(y_in))
+            + np.sqrt(self.y_reserves * np.sum(x_in))
+        )
+        exponent = 2 * np.sqrt(np.sum(x_in) * np.sum(y_in) / k)
+        end_x_sum = (
+            np.sqrt(k * np.sum(x_in) / np.sum(y_in))
+            * (np.exp(exponent) + c)
+            / (np.exp(exponent) - c)
+        )
+        end_y_sum = k / end_x_sum
 
         x_out_sum = self.x_reserves - end_x_sum + np.sum(x_in)
         y_out_sum = self.y_reserves - end_y_sum + np.sum(y_in)
@@ -66,13 +74,14 @@ class AMM:
         self.x_reserves = end_x_sum
         self.y_reserves = end_y_sum
 
-        x_out = x_out_sum * y_in/np.sum(y_in)
-        y_out = y_out_sum * x_in/np.sum(x_in)
+        x_out = x_out_sum * y_in / np.sum(y_in)
+        y_out = y_out_sum * x_in / np.sum(x_in)
 
         return TradeResult(x_out, y_out)
 
     def instantaneous_y_price(self):
         return float(self.x_reserves / self.y_reserves)
+
 
 if __name__ == "__main__":
     pass

@@ -16,7 +16,7 @@ class LongTermOrder:
 
     def qty_spent(self):
         blocks_in = self.blocks_lifespan - self.blocks_left
-        return (blocks_in)/self.blocks_lifespan * self.qty_in
+        return blocks_in / self.blocks_lifespan * self.qty_in
 
     def is_live(self):
         return self.blocks_left > 0

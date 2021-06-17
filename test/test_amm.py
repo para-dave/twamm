@@ -6,10 +6,10 @@ from amm import *
 def test_simple_cpmm():
     amm = AMM(2, 2)
     # x * y = 4, so if we put in 2 x, we should get out 1 y so that 4 * 1 = 4
-    res = amm.trade([1,1],0)
+    res = amm.trade([1, 1], 0)
     assert amm.x_reserves == 4
     assert amm.y_reserves == 1
-    assert np.allclose(res.x_out, [0.])
+    assert np.allclose(res.x_out, [0.0])
     assert np.allclose(res.y_out, [0.5, 0.5])
 
     # Redo with infinitessimal
@@ -18,7 +18,7 @@ def test_simple_cpmm():
     res = amm.infinitesimal_trade([1, 1], 0)
     assert np.allclose(amm.x_reserves, 4)
     assert np.allclose(amm.y_reserves, 1)
-    assert np.allclose(res.x_out, [0.])
+    assert np.allclose(res.x_out, [0.0])
     assert np.allclose(res.y_out, [0.5, 0.5])
 
 
@@ -29,8 +29,8 @@ def test_easy_two_way():
     res = amm.infinitesimal_trade(2, 3)
     assert np.allclose(amm.x_reserves, 2)
     assert np.allclose(amm.y_reserves, 3)
-    assert np.allclose(res.x_out, [2.])
-    assert np.allclose(res.y_out, [3.])
+    assert np.allclose(res.x_out, [2.0])
+    assert np.allclose(res.y_out, [3.0])
 
 
 def test_infinitesimal_trade():
@@ -49,8 +49,8 @@ def test_infinitesimal_trade():
     num_steps = 10000
     dupe_amm = AMM(x_start, y_start)
     for i in range(num_steps):
-        dupe_amm.trade(x_in/num_steps, 0)
-        dupe_amm.trade(0, y_in/num_steps)
+        dupe_amm.trade(x_in / num_steps, 0)
+        dupe_amm.trade(0, y_in / num_steps)
 
     assert np.allclose(amm.x_reserves, dupe_amm.x_reserves, rtol=1e-3, atol=1e-3)
     assert np.allclose(amm.y_reserves, dupe_amm.y_reserves, rtol=1e-3, atol=1e-3)

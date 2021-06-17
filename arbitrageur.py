@@ -1,4 +1,4 @@
-class Arbitrageur():
+class Arbitrageur:
     def __init__(self, twamm):
         self.twamm = twamm
         self.x_balance = 0
@@ -31,14 +31,17 @@ class Arbitrageur():
         # see https://research.paradigm.xyz/LP_Wealth.pdf
         if true_y_price > amm.x_reserves / amm.y_reserves:
             x_to_spend = max(
-                amm.x_reserves * ((true_y_price * amm.y_reserves/amm.x_reserves) ** (1/2)-1),
-                0)
+                amm.x_reserves
+                * ((true_y_price * amm.y_reserves / amm.x_reserves) ** (1 / 2) - 1),
+                0,
+            )
             return [x_to_spend, 0]
         elif true_y_price < amm.x_reserves / amm.y_reserves:
             y_to_spend = max(
-                amm.y_reserves * ((1/true_y_price * amm.x_reserves/amm.y_reserves) ** (1/2)-1),
-                0)
+                amm.y_reserves
+                * ((1 / true_y_price * amm.x_reserves / amm.y_reserves) ** (1 / 2) - 1),
+                0,
+            )
             return [0, y_to_spend]
         else:
             return [0, 0]
-
